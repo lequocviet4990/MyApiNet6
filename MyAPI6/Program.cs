@@ -9,7 +9,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+var version = typeof(Program).Assembly.GetName().Version.ToString();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = version,
+        Title = "API",
+        Description = "this is des",
+        TermsOfService = new Uri("http://google.com"),
+        Contact = new OpenApiContact
+        {
+            Name = "Contact 1",
+            Url = new Uri("http://google.com")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Licenc",
+            Url = new Uri("http://google.com")
+
+        }
+
+    });
+});
+
+
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
