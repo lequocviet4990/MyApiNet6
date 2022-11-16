@@ -12,6 +12,10 @@ namespace MyAPI6.Controllers
 
         private readonly MovieContext movieContext;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="movieContext"></param>
         public MovieController (MovieContext  movieContext)
         {
              this.movieContext = movieContext;
