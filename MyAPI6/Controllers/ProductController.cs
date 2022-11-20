@@ -57,5 +57,15 @@ namespace MyAPI6.Controllers
 
 
 
+        [HttpPost("Create")]
+        public ActionResult<ProductModel> Create()
+        {
+            var product = new ProductModel();
+
+            return product;
+        }
+
+
+
     }
 }

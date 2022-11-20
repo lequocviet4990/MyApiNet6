@@ -60,10 +60,14 @@ builder.Services.AddSwaggerGen(options =>
 
 
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
+
+//add automapper
 
 
 var app = builder.Build();

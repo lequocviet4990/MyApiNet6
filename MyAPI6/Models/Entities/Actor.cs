@@ -1,4 +1,4 @@
-﻿namespace MyAPI6.Models
+﻿namespace MyAPI6.Models.Entities
 {
     public class Actor
     {

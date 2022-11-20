@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyAPI6.Models.Entities;
 
 namespace MyAPI6.Models
 {
