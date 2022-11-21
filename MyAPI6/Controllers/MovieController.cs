@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyAPI6.Models;
 using MyAPI6.Models.Dto;
 using MyAPI6.Models.Entities;
+using System;
 
 namespace MyAPI6.Controllers
 {
@@ -13,11 +15,12 @@ namespace MyAPI6.Controllers
     {
         private readonly MovieContext movieContext;
         private readonly IMapper mapper;
-
-        public MovieController(MovieContext movieContext, IMapper mapper)
+       
+        public MovieController(MovieContext movieContext, IMapper mapper  )
         {
             this.movieContext = movieContext;
             this.mapper = mapper;
+           
         }
 
         [HttpGet("GetAll")]
@@ -90,19 +93,54 @@ namespace MyAPI6.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Create(MoviesDto model) //0
         {
-            int id = 0;
-            //var entitie =  new Movie();
-            //entitie.Id = id;
-            //entitie.Title = model.Title;
-            //entitie.Genre = model.Genre;
+             
+            #region Validate model
+            var validator = new MoviesValidator();
+            var resultValidate = validator.Validate(model);
+            if (!resultValidate.IsValid)
+            {
+                var error = string.Join(" | ", resultValidate.Errors.Select(m => m.ErrorMessage));
+                return new BadRequestObjectResult(
+                    new
+                    {
+                        ErrorCode = "400",
+                        ErrorMessage = error
+                    }
 
+                 );
+            }
+            #endregion
 
-            var entitie = mapper.Map<Movie>(model);
-
-
+            var entitie = mapper.Map<Movie>(model); 
             await this.movieContext.Movies.AddAsync(entitie);
             await this.movieContext.SaveChangesAsync();
             return Ok(entitie.Id); // phải dùng Ok(id) vì xài iactionResult
+        }
+
+
+        [HttpPost("UploadImage")]
+        public string UploadImage([FromForm] IFormFile file)
+        {
+            try
+            {
+                // getting file original name
+                string FileName = file.FileName;
+
+                // combining GUID to create unique name before saving in wwwroot
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
+
+                // getting full path inside wwwroot/images
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "images/", FileName);
+
+                // copying file
+                file.CopyTo(new FileStream(imagePath, FileMode.Create));
+
+                return "File Uploaded Successfully";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
