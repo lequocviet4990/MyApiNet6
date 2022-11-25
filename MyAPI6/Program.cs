@@ -3,6 +3,8 @@ using Microsoft.OpenApi.Models;
 using MyAPI6.Models;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using ConsoleApp1;
+using API.CORE.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +63,8 @@ builder.Services.AddSwaggerGen(options =>
 
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IOutFit, OutFit>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
