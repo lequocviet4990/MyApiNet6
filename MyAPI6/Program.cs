@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ConsoleApp1;
 using API.DATA;
 using API.CORE;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ var defaultLogAspNetCore = builder.Configuration["Logging:LogLevel:Microsoft.Asp
 var url = builder.Configuration["URLWeb"];
 var AllowedHosts = builder.Configuration["AllowedHosts"];
 var defaultLog2 = builder.Configuration["Logging:LogLevel"];
+
 
 
 builder.Services.AddControllers();
@@ -74,6 +76,19 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 //add automapper
 
+
+///log config
+var logConfig = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("logs\\log.txt", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: 2097152,rollOnFileSizeLimit:true, retainedFileCountLimit: null)
+    .CreateLogger();
+
+
+builder.Host.ConfigureLogging((ctx, builder) =>
+{
+    Log.Logger = logConfig;
+}).UseSerilog();
 
 var app = builder.Build();
 
