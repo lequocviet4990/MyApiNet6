@@ -1,14 +1,9 @@
-﻿using API.CORE.Entities;
-using API.CORE.Interface;
+﻿using API.CORE;
+using API.CORE.Entities;
 using AutoMapper;
 using ConsoleApp1;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MyAPI6.Models;
-using MyAPI6.Models.Dto;
-using MyAPI6.Models.Entities;
-using System;
+ 
 
 namespace MyAPI6.Controllers
 {
@@ -16,13 +11,12 @@ namespace MyAPI6.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly MovieContext movieContext;
+         
         private readonly IMapper mapper;
         private readonly IOutFit _outFit;
         private readonly IMovieRepository  _movieRepository;
-        public MovieController(MovieContext movieContext, IMapper mapper , IOutFit outFit , IMovieRepository movieRepository)
+        public MovieController(  IMapper mapper , IOutFit outFit , IMovieRepository movieRepository)
         {
-            this.movieContext = movieContext;
             this.mapper = mapper;
             this._outFit = outFit;
             this._movieRepository = movieRepository;
@@ -39,7 +33,7 @@ namespace MyAPI6.Controllers
             //    lstData = lstData.Where(x => x.IsPublic == true).ToList();
             //}
 
-            var lstData = _movieRepository.GetAll(false,true);
+            var lstData = await _movieRepository.GetAll(false,true);
            return lstData;
 
 

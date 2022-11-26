@@ -1,9 +1,9 @@
-﻿using API.CORE.Entities;
+﻿using API.CORE.Dto;
+using API.CORE.Entities;
 using AutoMapper;
-using MyAPI6.Models.Dto;
-using MyAPI6.Models.Entities;
+ 
 
-namespace MyAPI6.Automapper
+namespace API.CORE.Automapper
 {
     public class AutomapperProfile: Profile
     {

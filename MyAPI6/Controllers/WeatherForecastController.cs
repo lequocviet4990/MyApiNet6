@@ -1,6 +1,6 @@
 //using Core;
 using Microsoft.AspNetCore.Mvc;
-using MyAPI6.Model;
+ 
 
 namespace MyAPI6.Controllers
 {

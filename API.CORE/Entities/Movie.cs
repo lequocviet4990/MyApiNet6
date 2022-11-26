@@ -10,7 +10,7 @@
 
         public DateTime ReleaseDate { get; set; } //ngày xuất bản
         public DateTime CreateDate { get; set; }
-        public DateTime CreateUpdate { get; set; }
+        public DateTime UpdateDate { get; set; }
         public DateTime CreateBy { get; set; }
         public DateTime UpdateByLasted { get; set; }
         public bool IsDelete { get; set; }

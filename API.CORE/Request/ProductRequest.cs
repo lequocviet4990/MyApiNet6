@@ -1,6 +1,6 @@
-﻿namespace MyAPI6.Models
+﻿namespace API.CORE.Request
 {
-    public class ProductModel
+    public class ProductRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }

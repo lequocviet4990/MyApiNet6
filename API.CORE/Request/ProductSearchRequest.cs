@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MyAPI6.Models
+namespace API.CORE.Request
 {
-    public class ProductSearchDTO
+    public class ProductSearchRequest
     {
         [Required]
         public string Name { get; set; }

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.CORE.Request;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MyAPI6.Models;
-
+ 
 namespace MyAPI6.Controllers
 {
     [Route("api/[controller]")]  // localhost:8081/api/Product/Create
@@ -9,31 +9,31 @@ namespace MyAPI6.Controllers
     public class ProductController : ControllerBase
     {
         [HttpGet("GetAll")]        
-        public ActionResult<List<ProductModel>> GetAll( )
+        public ActionResult<List<ProductRequest>> GetAll( )
         {
-           var products = new List<ProductModel>();
+           var products = new List<ProductRequest>();
 
             return products;
         }
 
         [HttpGet("GetByID")]
-        public ActionResult<ProductModel> GetByID(int id )
+        public ActionResult<ProductRequest> GetByID(int id )
         {
-            var product = new  ProductModel();
+            var product = new  ProductRequest();
 
             return product;
         }
 
 
         [HttpPost("Search")]
-        public ActionResult<List<ProductModel>> Search(ProductSearchDTO productSearchDTO)
+        public ActionResult<List<ProductRequest>> Search(ProductSearchRequest productSearchDTO)
         {
-            var result = new List<ProductModel>();
+            var result = new List<ProductRequest>();
             //validate input
 
             if (ModelState.IsValid)
             {
-               result.Add( new ProductModel()); 
+               result.Add( new ProductRequest()); 
             }
             else
             {
@@ -58,9 +58,9 @@ namespace MyAPI6.Controllers
 
 
         [HttpPost("Create")]
-        public ActionResult<ProductModel> Create()
+        public ActionResult<ProductRequest> Create()
         {
-            var product = new ProductModel();
+            var product = new ProductRequest();
 
             return product;
         }

@@ -1,10 +1,10 @@
 ﻿
 using API.CORE.Entities;
 
-namespace API.CORE.Interface
+namespace API.CORE
 {
     public interface IMovieRepository
     {
-        List<Movie> GetAll(bool? isDelete, bool? isPublic);
+        Task  <List<Movie>> GetAll(bool? isDelete, bool? isPublic);
     }
 }

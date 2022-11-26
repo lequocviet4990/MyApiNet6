@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using System.Data;
 
-namespace MyAPI6.Models.Dto
+namespace API.CORE.Dto
 {
     public class MoviesDto
     {

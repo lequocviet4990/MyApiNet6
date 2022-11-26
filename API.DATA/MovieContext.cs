@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MyAPI6.Models.Entities;
+﻿using API.CORE.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace MyAPI6.Models
+namespace API.DATA
 {
     public class MovieContext: DbContext
     {
@@ -21,7 +21,7 @@ namespace MyAPI6.Models
             
         }
 
-        //public DbSet<Movie> Movies { get; set; }
+         public DbSet<Movie> Movies { get; set; }
         public DbSet<Actor>  Actors { get; set; }
     }
 }
