@@ -6,6 +6,8 @@ using ConsoleApp1;
 using API.DATA;
 using API.CORE;
 using Serilog;
+ 
+using MyAPI6.Hellper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,12 +69,15 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IOutFit, OutFit>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
-builder.Services.AddScoped<IActorRepository, ActorRepository>();
+builder.Services.AddScoped<ActorRepository, ActorRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 //add automapper
 
@@ -92,6 +97,8 @@ builder.Host.ConfigureLogging((ctx, builder) =>
 
 var app = builder.Build();
 
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -101,6 +108,8 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", $"MY API NET 6.0 ver_{Assembly.GetExecutingAssembly().GetName().Version.ToString()}" );
        
     });
+
+    app.UseMiddleware<JwtMiddleware>();
 }
 
 
