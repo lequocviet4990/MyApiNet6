@@ -13,6 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.CORE", "..\API.CORE\API
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.DATA", "..\API.DATA\API.DATA.csproj", "{FB3A0035-8C5C-4E9E-81F0-FF891C41D65A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseScript", "DatabaseScript", "{E7E6FD3B-B711-462F-BFA3-0D1AC112B35E}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\lequo\Downloads\dbscript.sql = C:\Users\lequo\Downloads\dbscript.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
