@@ -11,6 +11,10 @@ namespace API.CORE.Automapper
         {
             CreateMap<Movie, MoviesDto>();
             CreateMap<MoviesDto, Movie>();
+
+
+            CreateMap<ProductModelDto, ProductModel>();
+            CreateMap<ProductModel, ProductModelDto>();
         }
     }
 }

@@ -34,5 +34,8 @@ namespace ConsoleApp
 
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Actor> Actors { get; set; }
+
+        public DbSet<ProductModel> ProductModels { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

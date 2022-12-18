@@ -6,8 +6,10 @@ using ConsoleApp1;
 using API.DATA;
 using API.CORE;
 using Serilog;
- 
+
 using MyAPI6.Hellper;
+using API.CORE.Interface;
+using API.DATA.Implement; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,6 @@ var defaultLog2 = builder.Configuration["Logging:LogLevel"];
 
 
 builder.Services.AddControllers();
-
 // Add Nutget
 //Microsoft.EntityFrameworkCore
 //Microsoft.EntityFrameworkCore.SqlServer /oracel / mysql
@@ -68,8 +69,14 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IOutFit, OutFit>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+ 
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
-builder.Services.AddScoped<ActorRepository, ActorRepository>();
+builder.Services.AddScoped<IActorRepository, ActorRepository>();
+builder.Services.AddScoped<IProductRepository,  ProductRepository>();
+builder.Services.AddScoped<IProductModelRepository,  ProductModelRepository>();
+ 
+
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
